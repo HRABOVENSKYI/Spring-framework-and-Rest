@@ -26,7 +26,7 @@ public class StudentsController {
 
     @GetMapping
     public List<Student> getStudents() {
-        return new LinkedList<Student>(students.values());
+        return studentService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -36,11 +36,7 @@ public class StudentsController {
 
     @PostMapping
     public Student createStudent(final @RequestBody Student student) {
-        System.out.println(studentService.createStudent(student));
-
-        student.setId(idCounter.incrementAndGet());
-        students.put(student.getId(), student);
-        return student;
+        return studentService.createStudent(student);
     }
 
     @PutMapping("/{id}")
