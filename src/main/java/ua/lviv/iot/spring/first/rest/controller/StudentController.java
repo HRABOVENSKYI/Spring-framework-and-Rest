@@ -8,14 +8,13 @@ import ua.lviv.iot.spring.first.rest.business.StudentService;
 import ua.lviv.iot.spring.first.rest.model.Student;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RequestMapping("/students")
 @RestController
-public class StudentsController {
+public class StudentController {
 
     private Map<Integer, Student> students = new HashMap<>();
 
@@ -25,8 +24,12 @@ public class StudentsController {
     private StudentService studentService;
 
     @GetMapping
-    public List<Student> getStudents() {
-        return studentService.findAll();
+    public List<Student> getStudents(
+            final @RequestParam(value = "firstName", required = false) String firstName) {
+        if (firstName == null) {
+            return studentService.findAll();
+        }
+        return studentService.getAllByFirstName(firstName);
     }
 
     @GetMapping("/{id}")
