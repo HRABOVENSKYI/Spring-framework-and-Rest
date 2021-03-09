@@ -10,18 +10,19 @@ import ua.lviv.iot.spring.first.rest.model.Student;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RequestMapping("/students")
 @RestController
 public class StudentController {
 
-    private Map<Integer, Student> students = new HashMap<>();
+    private final Map<Integer, Student> students = new HashMap<>();
 
-    private AtomicInteger idCounter = new AtomicInteger();
+    private final StudentService studentService;
 
     @Autowired
-    private StudentService studentService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping
     public List<Student> getStudents(
