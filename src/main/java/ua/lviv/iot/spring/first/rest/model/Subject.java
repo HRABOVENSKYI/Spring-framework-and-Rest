@@ -6,16 +6,18 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "subject")
 public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Student_Subject",
+    @JoinTable(name = "student_subject",
             joinColumns = {@JoinColumn(name = "subject_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "student_id", nullable = false)})
     @JsonIgnoreProperties("subjects")

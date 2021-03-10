@@ -13,8 +13,10 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "enrollment_year")
     private Integer enrollmentYear;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
