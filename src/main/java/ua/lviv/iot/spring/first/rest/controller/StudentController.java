@@ -28,7 +28,7 @@ public class StudentController {
     public List<Student> getStudents(
             final @RequestParam(value = "firstName", required = false) String firstName) {
         if (firstName == null) {
-            return studentService.findAll();
+            return studentService.getStudents();
         }
         return studentService.getAllByFirstName(firstName);
     }
@@ -39,8 +39,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student createStudent(final @RequestBody Student student) {
-        return studentService.createStudent(student);
+    public Student registerNewStudent(final @RequestBody Student student) {
+        return studentService.addNewStudent(student);
     }
 
     @PutMapping("/{id}")

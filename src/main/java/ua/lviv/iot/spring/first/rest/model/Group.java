@@ -12,11 +12,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "enrollment_year")
     private Integer enrollmentYear;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
