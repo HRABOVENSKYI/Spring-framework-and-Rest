@@ -43,20 +43,15 @@ public class StudentController {
         return studentService.addNewStudent(student);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity updateStudent(final @PathVariable("id") Integer studentId, final @RequestBody Student student) {
-        if (students.remove(studentId) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-            student.setId(studentId);
-            students.put(student.getId(), student);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable("id") Integer studentId) {
+        studentService.deleteStudent(studentId);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteStudent(@PathVariable("id") Integer studentId) {
-        HttpStatus status = students.remove(studentId) == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
-        return ResponseEntity.status(status).build();
+    @PutMapping("/{id}")
+    public Student updateStudent(final @PathVariable("id") Integer studentId,
+                                 final @RequestParam(required = false) String firstName,
+                                 final @RequestParam(required = false) String fullName) {
+        return studentService.updateStudent(studentId, firstName, fullName);
     }
 }
